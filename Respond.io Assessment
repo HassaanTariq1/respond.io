@@ -1,0 +1,25 @@
+describe('Login Test', () => {
+  it('Should successfully log in with valid credentials', () => {
+    
+                                    // Visit login page
+    cy.visit('https://app.respond.io/user/login'); 
+    
+
+                                    // Enter email
+    cy.get('input[name="field_2"]') 
+      .type('hassaant2@gmail.com');
+    
+
+                                    // Enter password
+    cy.get('input[name="field_3"]') 
+      .type('Kitchen123..');
+    
+
+                                  // Click login button
+    cy.get('button[type="submit"]').click();
+    
+
+                                  // Verify login success by checking URL or element after login
+    cy.url().should('include', '/onboarding'); 
+  });
+});
