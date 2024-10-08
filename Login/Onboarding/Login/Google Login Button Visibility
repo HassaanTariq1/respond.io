@@ -1,0 +1,13 @@
+describe('Login Test - Google Login Button Visibility', () => {
+  it('Should display the Google login button', () => {
+
+
+
+    // Visit the login page
+    cy.visit('https://app.respond.io/user/login'); 
+
+    // Verify that the Google login button is visible
+    cy.get('//*[@id="authContainer"]/div[1]/div[2]/div/div/form/div[1]/a') 
+      .should('be.visible');
+  });
+});

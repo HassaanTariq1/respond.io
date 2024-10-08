@@ -1,0 +1,31 @@
+describe('Login Test - Google Login Failed (Mocked)', () => {
+  it('Should simulate a failed Google login', () => {
+
+
+    cy.visit('https://app.respond.io/user/login'); 
+
+    // Intercept and mock the Google login request/response
+    cy.intercept({
+      method: 'GET',
+      url: 'https://auth.respond.io/oauth2/authorize?response_type=code&client_id=7sak91sstusb0fjvksm20qorif&redirect_uri=https:%2F%2Fapp.respond.io%2Fauth%2Foauth%2Fcallback&identity_provider=Google&_gl=1*yy9x4f*_ga*MTU4MTAzMzQ1LjE3Mjc5ODQ2Mzk.*_ga_6Q6V2S0J6G*MTcyODMyODc1NS4yLjEuMTcyODMzMzE0MC42MC4wLjA.*_gcl_au*Mjc4MzU1MDUuMTcyNzk4NDYzNg..', 
+    }, {
+      statusCode: 401, // Mock failed login response
+      body: {
+        error: 'Google login failed'
+      }
+    }).as('googleLoginFailed');
+
+    // Click the "Login with Google" button
+    cy.get('[@id="authContainer"]/div[1]/div[2]/div/div/form/div[1]/a') 
+      .click();
+
+    // Wait for the Google login to fail and verify the URL did not change
+    cy.wait('@googleLoginFailed');
+    cy.url().should('eq', 'https://app.respond.io/user/login'); 
+
+    // Verify the error message
+    cy.get('Google login failed')
+      .should('be.visible')
+      .and('contain', 'Google login failed');
+  });
+});

@@ -1,0 +1,19 @@
+describe('Login Test - Invalid Email Format', () => {
+  it('Should show an error for invalid email format', () => {
+
+
+    cy.visit('https://app.respond.io/user/login'); 
+
+    cy.get('input[name="field_2"]').type('hassaant2gmail.com'); // Invalid email format
+    cy.get('input[name="field_3"]').type('Kitchen123..');
+
+    cy.get('button[type="submit"]').click();
+
+    // Check that the URL did not change
+    cy.url().should('eq', 'https://app.respond.io/user/login'); 
+
+    // Check for an invalid email format error message
+    cy.get('This field value must be a valid email') 
+      .should('be.visible')
+      .and('contain', 'This field value must be a valid email');
+  });

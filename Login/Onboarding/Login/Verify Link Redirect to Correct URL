@@ -1,0 +1,35 @@
+describe('Links Test - Verify Redirect to Correct URL', () => {
+  it('Should redirect to the correct URL when links are clicked', () => {
+
+
+
+
+    // Visit the login page
+    cy.visit('https://app.respond.io/user/login'); 
+
+    // Click "Forgot Password" link and verify URL
+    cy.get('//*[@id="authContainer"]/div[1]/div[2]/div/div/form/div[3]/div[2]/div[2]/div/a/span').click();
+    cy.url().should('include', '/password/forget'); 
+
+    // Go back to the login page
+    cy.go('back');
+
+    // Click "Create one" link and verify URL
+    cy.get('//*[@id="authContainer"]/div[1]/div[2]/div/div/div[2]/a/span').click(); 
+    cy.url().should('include', '/user/register'); 
+
+    // Go back to the login page
+    cy.go('back');
+
+    // Click "terms of service" link and verify URL
+    cy.get('//*[@id="authContainer"]/div[1]/div[2]/div/div/form/div[4]/div/a[1]/span').click(); 
+    cy.url().should('include', '/terms-of-service'); 
+
+    // Go back to the login page
+    cy.go('back');
+
+    // Click "Privacy Policy" link and verify URL
+    cy.get('//*[@id="authContainer"]/div[1]/div[2]/div/div/form/div[4]/div/a[2]/span').click();
+    cy.url().should('include', '/privacy-policy'); 
+  });
+});

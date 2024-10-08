@@ -1,0 +1,26 @@
+it('should select a radio button', () => {
+  cy.get('#form').find('input[name="business-goal"]').eq(0).check();
+
+  // Verify that the selected radio button is checked
+  cy.get('#form').find('input[name="business-goal"]').eq(0).should('be.checked');
+
+
+  it('should check and uncheck a checkbox', () => {
+    cy.get('#form').find('input[name="company-focus"]').eq(0).check();
+    cy.get('#form').find('input[name="company-focus"]').eq(0).uncheck();
+  
+    // Verify that the checkbox is unchecked
+    cy.get('#form').find('//*[@id="authContainer"]/div[1]/div[2]/div/div/form/div[1]/div/div/div[2]/div/div/div[3]/div[2]/div/div/label/span/span]').eq(0).should('not.be.checked');
+  
+
+
+
+    cy.get('//*[@id="authContainer"]/div[1]/div[2]/div/div/form/div[2]/div/div[2]/div/div[2]/button/span[3]/span').click();
+
+
+    cy.get('Organization create') 
+    .should('be.visible')
+    .and('contain', 'Organization Created');
+
+
+});

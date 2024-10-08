@@ -1,0 +1,36 @@
+it('should validate mandatory fields', () => {
+
+
+    cy.get('input[name="field_8"]').type('hassaan organization');
+    cy.get('input[name="field_9"]').type('www.abc.com');
+    cy.get('input[placeholder="Enter your organization phone number"]').type('3375105251');
+  cy.get('//*[@id="authContainer"]/div[1]/div[2]/div/div/form/div[1]/div/div/div[2]/div/div/div[3]/div/div/button/span').select('PK');
+
+  
+  cy.get('#industry').should('be.visible');
+  cy.get('#industry').select('Automotive');
+  
+// Assert that the selected option is correct
+cy.get('#industry').should('have.value', 'automotive'); 
+
+
+
+cy.get('#role').should('be.visible');
+cy.get('#role').select('Owner');
+
+// Assert that the selected option is correct
+cy.get('#role').should('have.value', 'Owner'); 
+
+
+
+
+
+cy.get('//*[@id="authContainer"]/div[1]/div[2]/div/div/form/div[2]/div/div[2]/div/div/button/span[3]/span').click();
+
+cy.get('What are the primary communication channels you want to connect?') 
+      .should('be.visible')
+      .and('contain', 'What are the primary');
+
+});
+
+

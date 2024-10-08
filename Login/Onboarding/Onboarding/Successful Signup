@@ -1,0 +1,33 @@
+describe('Signup Test - Successful Registration', () => {
+  it('Should successfully sign up with valid credentials', () => {
+
+
+    // Visit the signup page
+    cy.visit('https://app.respond.io/user/register');
+
+    // Enter a First name
+    cy.get('input[name="field_33"]').type('hassaan'); 
+
+    // Enter a Last name
+    cy.get('input[name="field_34"]').type('tariq'); 
+
+
+    // Enter a valid email
+    cy.get('input[name="field_33"]').type('hassaantest13@gmail.com'); 
+
+    // Enter a valid password
+    cy.get('input[name="password"]').type('Kitchen123..');
+
+
+    // Click the "Get Started" button
+    cy.get('button[type="submit"]').click(); 
+
+    // Verify that the user is redirected to the email confirm page 
+    cy.url().should('include', '/email_confirm'); 
+
+    // Verify that the user is redirected to the appropriate page after signup
+    cy.url().should('include', '/create_organization'); 
+
+
+  });
+});

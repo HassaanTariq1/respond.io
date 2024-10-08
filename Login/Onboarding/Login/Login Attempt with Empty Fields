@@ -1,0 +1,13 @@
+describe('Login Test - Empty Fields', () => {
+  it('Should display errors when login is attempted with empty fields', () => {
+
+
+    cy.visit('https://app.respond.io/user/login');
+
+    cy.get('button[type="submit"]').click();
+
+    // Ensure the URL is still the same (no redirection occurred)
+    cy.url().should('eq', 'https://app.respond.io/user/login'); 
+
+  });
+});
